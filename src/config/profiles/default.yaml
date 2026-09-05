@@ -1,0 +1,33 @@
+schema_version: 1
+profile_template_id: default
+profile_template_version: "2026-03-24"
+
+prompt:
+  template: prompts/general_system_prompt.j2
+
+generation:
+  max_tokens: 512
+  temperature: 0.7
+  top_p: 0.8
+  enable_min_tokens_strategy: false
+  min_tokens_long_response: 0
+  long_response_max_tokens: 0
+
+routing:
+  enable_enhanced_handlers: true
+  enable_clarification: true
+  structured_query_fast_mode: auto
+  structured_entity_resolution: true
+  structured_natural_response_style: true
+
+grounding:
+  allow_general_knowledge_fallback: true
+  min_verification_threshold: 0.1
+  enable_collection_query_anchoring: true
+  collection_anchor_terms: []
+
+query_handler:
+  canned_responses:
+    greeting: "Hello! How can I help you today?"
+    acknowledgment: "You're welcome. Let me know if you have more questions."
+    meaningless: "I'm here to help with questions related to this knowledge base."

@@ -1,0 +1,26 @@
+[Unit]
+Description=Qdrant Vector Database Server
+After=network.target
+Documentation=https://qdrant.tech/
+
+[Service]
+Type=simple
+User=PROJECT_USER
+Group=PROJECT_USER
+WorkingDirectory=PROJECT_DIR
+ExecStart=PROJECT_DIR/scripts/start_qdrant_local.sh
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Environment variables
+Environment="QDRANT_HOST=0.0.0.0"
+Environment="QDRANT_PORT=6333"
+
+# Resource limits
+LimitNOFILE=131072
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target

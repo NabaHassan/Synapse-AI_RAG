@@ -1,0 +1,5 @@
+default: prompts/general_system_prompt.j2
+general: prompts/general_system_prompt.j2
+detailed: prompts/general_system_prompt.j2
+concise: prompts/general_system_prompt.j2
+box: prompts/general_system_prompt.j2

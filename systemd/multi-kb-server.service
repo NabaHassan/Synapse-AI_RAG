@@ -1,0 +1,40 @@
+[Unit]
+Description=Multi-KB RAG Pipeline FastAPI Server
+After=network.target qdrant.service synapse-redis.service
+Requires=qdrant.service synapse-redis.service
+Documentation=https://github.com/your-repo/infrastructure-ai
+
+[Service]
+Type=simple
+User=PROJECT_USER
+Group=PROJECT_USER
+WorkingDirectory=PROJECT_DIR
+
+# Load secrets and feature flags from .env
+EnvironmentFile=-PROJECT_DIR/.env
+
+# Activate conda environment and run the multi-KB RAG server
+ExecStart=/bin/bash -c 'source /home/PROJECT_USER/miniconda3/etc/profile.d/conda.sh && conda activate naba-env && cd PROJECT_DIR && export PYTHONPATH=PROJECT_DIR:$PYTHONPATH && python src/api/multi_kb_server.py --host 0.0.0.0 --port 8000'
+
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Environment variables
+Environment="PYTHONUNBUFFERED=1"
+Environment="QDRANT_URL=http://localhost:6333"
+Environment="DATA_DIR=PROJECT_DIR/data"
+Environment="LLM_MODEL=Qwen/Qwen3-30B-A3B-Instruct-2507"
+Environment="EMBEDDING_MODEL=BAAI/bge-large-en-v1.5"
+Environment="VLLM_WORKER_MULTIPROC_METHOD=spawn"
+Environment="REDIS_ENABLED=true"
+Environment="PYTHONPATH=PROJECT_DIR"
+
+
+# Resource limits
+LimitNOFILE=131072
+TimeoutStartSec=30
+
+[Install]
+WantedBy=multi-user.target

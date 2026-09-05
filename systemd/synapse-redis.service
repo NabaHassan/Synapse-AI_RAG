@@ -1,0 +1,29 @@
+[Unit]
+Description=Synapse Redis Service (local binary or Docker fallback)
+After=network.target
+Documentation=https://redis.io/
+
+[Service]
+Type=simple
+User=PROJECT_USER
+Group=PROJECT_USER
+WorkingDirectory=PROJECT_DIR
+ExecStart=PROJECT_DIR/scripts/start_redis_local.sh
+ExecStop=/bin/bash -c 'if command -v docker >/dev/null 2>&1; then docker stop ${REDIS_CONTAINER_NAME:-synapse-redis} >/dev/null 2>&1 || true; fi'
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+# Redis runtime defaults
+Environment="REDIS_PORT=6379"
+Environment="REDIS_IMAGE=redis:7-alpine"
+Environment="REDIS_CONTAINER_NAME=synapse-redis"
+Environment="REDIS_DATA_DIR=/var/lib/synapse-redis"
+
+# Resource limits
+LimitNOFILE=131072
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target

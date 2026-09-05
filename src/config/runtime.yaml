@@ -1,0 +1,86 @@
+schema_version: 1
+
+executors:
+  query_workers: 4
+  index_workers: 2
+
+admission_control:
+  query_max_inflight: auto
+  query_admission_timeout_seconds: 1.0
+  query_retry_after_seconds: 3
+  session_lock_timeout_seconds: 2.0
+  session_lock_retry_after_seconds: 2
+  query_read_guard_timeout_seconds: 0.25
+  admin_write_timeout_seconds: 5.0
+  indexing_write_drain_timeout_seconds: 120.0
+  indexing_retry_after_seconds: 5
+  query_timeout_seconds: null
+
+llm_concurrency:
+  max_concurrency: 2
+  admission_timeout_seconds: 6.0
+  retry_after_seconds: 2
+
+async_jobs:
+  enabled: true
+  workers: 1
+  queue_max_size: 256
+  default_timeout_seconds: 300
+  max_timeout_seconds: 900
+  retention_seconds: 3600
+  cleanup_interval_seconds: 30
+  min_retry_delay_seconds: 0.1
+  max_retry_delay_seconds: 3.0
+
+provisioning_jobs:
+  enabled: true
+  workers: 1
+  queue_max_size: 128
+  default_timeout_seconds: 900
+  max_timeout_seconds: 3600
+  retention_seconds: 86400
+  cleanup_interval_seconds: 60
+  min_retry_delay_seconds: 0.5
+  max_retry_delay_seconds: 5.0
+
+indexing:
+  mode: online
+  dense_visibility_filter_enabled: true
+  write_drain_timeout_seconds: 120
+  retry_after_seconds: 5
+  backfill_ingest_state_on_startup: true
+  online_min_text_length: 200
+  online_min_quality_score: 0.4
+  online_remove_urls: false
+  online_remove_emails: false
+  online_use_unstructured_fallback: true
+
+redis:
+  enabled: true
+  url: redis://localhost:6379/0
+  key_prefix: synapse
+  socket_timeout_seconds: 1.0
+  connect_timeout_seconds: 1.0
+  lock_enabled: true
+  lock_ttl_seconds: 300
+  lock_retry_interval_seconds: 0.05
+  rate_limit_enabled: true
+  rate_counter_ttl_seconds: 360
+  rate_limit_retry_after_seconds: 2
+  session_max_inflight: 1
+  user_max_inflight: 4
+  session_store_enabled: true
+  session_ttl_seconds: 604800
+  session_read_through_enabled: true
+  query_cache_enabled: true
+  query_cache_ttl_seconds: 0
+
+watchdog:
+  enabled: true
+  stuck_threshold_seconds: 240
+  check_interval_seconds: 5
+
+mcp:
+  enabled: true
+  services: gmail,drive,calendar
+  token_ttl_seconds: 86400

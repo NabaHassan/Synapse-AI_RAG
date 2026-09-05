@@ -1,0 +1,30 @@
+schema_version: 1
+profile_template_id: client_cafl_legal_kb
+profile_template_version: "2026-03-24"
+
+generation:
+  max_tokens: 1024
+  temperature: 0.4
+  top_p: 0.8
+  enable_min_tokens_strategy: true
+  min_tokens_long_response: 512
+  long_response_max_tokens: 2048
+
+routing:
+  enable_enhanced_handlers: true
+  enable_clarification: true
+  structured_query_fast_mode: auto
+  structured_entity_resolution: true
+  structured_natural_response_style: true
+
+grounding:
+  allow_general_knowledge_fallback: true
+  min_verification_threshold: 0.1
+  enable_collection_query_anchoring: true
+  collection_anchor_terms: [ ]
+
+query_handler:
+  canned_responses:
+    greeting: "Hello! I'm Synapse, developed by Eris AI. I specialize in California Family Law. How can I help you today?"
+    acknowledgment: "You're welcome! Is there anything else about California Family Law I can help you with?"
+    meaningless: "I'm here to help with California Family Law questions."
