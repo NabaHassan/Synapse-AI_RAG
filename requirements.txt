@@ -1,0 +1,39 @@
+﻿# API / server
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.0
+httpx>=0.27.0
+requests>=2.31.0
+python-multipart>=0.0.9
+PyYAML>=6.0
+
+# Vector store + cache
+qdrant-client>=1.11.0
+redis>=5.0.0
+
+# RAG / ML stack
+haystack-ai>=2.6.0
+sentence-transformers>=3.0.0
+transformers>=4.44.0
+torch>=2.2.0
+numpy>=1.26.0
+tqdm>=4.66.0
+spacy>=3.7.0
+
+# Local LLM (requires CUDA GPU; omit on CPU-only machines)
+vllm>=0.6.0
+
+# Document ingestion
+pypdf>=4.0.0
+python-docx>=1.1.0
+PyMuPDF>=1.24.0
+python-pptx>=1.0.0
+openpyxl>=3.1.0
+pandas>=2.2.0
+beautifulsoup4>=4.12.0
+
+# Optional connectors / web search
+duckduckgo-search>=6.0.0
+slack-sdk>=3.27.0
+google-auth>=2.29.0
+google-auth-oauthlib>=1.2.0
