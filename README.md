@@ -1,4 +1,4 @@
-﻿# Synapse AI — Multi-KB RAG
+# Synapse AI — Multi-KB RAG
 
 Production RAG API for multiple isolated knowledge bases: hybrid retrieval (dense + BM25), citation-grounded answers, online document indexing, and conversational sessions. Built so one shared LLM/embedding stack can serve many tenants without mixing their data.
 
